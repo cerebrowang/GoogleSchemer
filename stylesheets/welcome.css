@@ -13,7 +13,7 @@
   bottom: 0;
   width: 100%;
   height: 170px;
-  background: url(../img/bg-dark-tile.png) repeat-x;
+  background: url(../images/bg-dark-tile.png) repeat-x;
 }
 
 .footer-fix {
@@ -24,7 +24,7 @@
 
 .schemer-footer {
   height: 211px;
-  background: url(../img/ill-footer.png) no-repeat bottom center;
+  background: url(../images/ill-footer.png) no-repeat bottom center;
   position: relative;
   top: -327px;
   margin-bottom: 10px;

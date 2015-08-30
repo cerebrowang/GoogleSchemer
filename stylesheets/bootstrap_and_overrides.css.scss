@@ -26,7 +26,7 @@ body {
   padding: 0;
   border: 0;
 	height:100%;
-	background:#89d0e9 url(../img/bg-lt-blue.png);
+	background:#89d0e9 url(../images/bg-lt-blue.png);
 	font-size:13px;
 	line-height:18px;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -105,7 +105,7 @@ color: #1D3836;
   position: relative;
   padding: 0px 20px 22px;
   background-position: 0% 0%;
-  background-image: url(../img/mustache-bounce-sm.gif);
+  background-image: url(../images/mustache-bounce-sm.gif);
   background-repeat:no-repeat;
   background-position: center;
 }
@@ -131,7 +131,7 @@ color: #1D3836;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-radius: 0px;
-  background: #1D3836 url(../img/navbar-texture.png) repeat-x;
+  background: #1D3836 url(../images/navbar-texture.png) repeat-x;
   filter: none;
 }
 
@@ -344,7 +344,7 @@ color: #1D3836;
 
 .ill-footer {
    height: 230px;
-   background: url(../img/ill-footer.png) no-repeat bottom center;  
+   background: url(../images/ill-footer.png) no-repeat bottom center;  
 }
 
 .footer-nav {
@@ -383,14 +383,14 @@ color: #1D3836;
   margin: 10px -20px 0;
   bottom: 0;
   padding: 50px 130px;
-  background: #244041 url(../img/bg-onboarding-texture.jpg) repeat-x;
+  background: #244041 url(../images/bg-onboarding-texture.jpg) repeat-x;
   text-shadow: 0 1px rgba(0, 0, 0, 0.5);
 }
 
 .onboarding {
   color: white;
   font-size: 14px;
-  background: #244041 url(../img/bg-onboarding-texture.jpg) repeat-x;
+  background: #244041 url(../images/bg-onboarding-texture.jpg) repeat-x;
 }
 
 .submit-btn-fix {
@@ -403,7 +403,7 @@ color: #1D3836;
   top: 80px;
   width: 59px;
   height: 156px;
-  background: url(../img/ill-parachute.png) no-repeat;
+  background: url(../images/ill-parachute.png) no-repeat;
 }
 
 .ill-chef {
@@ -412,7 +412,7 @@ color: #1D3836;
   top: -98px;
   width: 74px;
   height: 98px;
-  background: url(../img/ill-chef.png) no-repeat;
+  background: url(../images/ill-chef.png) no-repeat;
 }
 
 .ill-reader {
@@ -421,7 +421,7 @@ color: #1D3836;
   left: 0;
   width: 150px;
   height: 99px;
-  background: url(../img/ill-reader.png) no-repeat;
+  background: url(../images/ill-reader.png) no-repeat;
 }
 
 .image-polaroid-fix {
@@ -644,27 +644,27 @@ padding: 0px 15px;
 .trash-off {
   opacity: 0.5;
   filter: alpha(opacity=50);
-  background-image: url(../img/ic-trash-hover.png);
+  background-image: url(../images/ic-trash-hover.png);
 }
 
 .trash-off:hover {
   cursor: pointer;
   opacity: 1;
   filter: alpha(opacity=100);  
-  background-image: url(../img/ic-trash-hover.png);
+  background-image: url(../images/ic-trash-hover.png);
 }
 
 .flag-off {
   opacity: 0.5;
   filter: alpha(opacity=50);
-  background-image: url(../img/ic-flag-hover.png);
+  background-image: url(../images/ic-flag-hover.png);
 }
 
 .flag-off:hover {
   cursor: pointer;
   opacity: 1;
   filter: alpha(opacity=100);  
-  background-image: url(../img/ic-flag-hover.png);
+  background-image: url(../images/ic-flag-hover.png);
 }
 
 .rally-accomplices {
@@ -677,12 +677,12 @@ padding: 0px 15px;
 }
 
 .rally-accomplices span {
-  background: url(../img/megaphone-light.png) no-repeat 0 1px;
+  background: url(../images/megaphone-light.png) no-repeat 0 1px;
   padding: 5px 0 5px 26px;
 }
 
 .rally-accomplices:hover  {
-  background-image: url(../img/megaphone.png) no-repeat 0 1px;
+  background-image: url(../images/megaphone.png) no-repeat 0 1px;
   border-color: #E1E1E1;
   -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.3);
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
@@ -784,11 +784,11 @@ margin-left: 5px;
 }
 
 .categories-img-fix {
-  background-image: url(../img/category.png);
+  background-image: url(../images/category.png);
 }
 
 .where-img-fix {
-  background-image: url(../img/where.png);
+  background-image: url(../images/where.png);
 }
 
 .close-btn-fix {
