@@ -1,0 +1,32 @@
+<li class="media">
+  <%= link_to image_tag(commenter.image_url(:normal), alt: commenter.name, class: "media-object img-thumbnail img-thumbnail-fix"), commenter, :class => "pull-left" %>
+  <div class="media-body">
+    <span class="">
+      <span class="media-heading"><strong><%= link_to commenter.name, commenter %></strong></span>
+      <span><%= time_ago_in_words(comment.created_at) %> ago</span>
+    </span>
+    <div class="comment_content"><%= comment.content %></div>
+    <div class="edit_comment_form hidden">
+      <%= form_for([@scheme, @scheme.comments.build], :html => {:id => nil}, :url => scheme_comment_path(comment.scheme, comment), :method => "put") do |f| %>
+      <%= f.hidden_field :user_id, :id => nil, :value => current_user.id %>
+      <%= f.text_area :content , class: "col-md-10", :id => nil, rows: "2" %>
+      <%= f.submit "Save comment", class: "btn btn-fix btn-blue-fix" %>
+      <button type="button" class="cancel_edit_comment btn btn-link btn-fix" >Cancel</button>
+      <% end %>
+    </div>      
+    <div class="bottom-line-fix">
+      <span><%= link_to reply_count(comment), reply_scheme_comment_path(comment.scheme, comment), :class => 'reply_comment', :remote => true %></span>
+      <% if current_user.id == comment.user_id %>
+      <span><%= link_to 'Edit', edit_scheme_comment_path(comment.scheme, comment), :class => 'edit_comment' %></span>
+      <span><%= link_to 'Delete', [comment.scheme, comment], data: { confirm: 'Are you sure?' }, method: :delete %></span>
+
+      <% else %>
+      <span><%= link_to 'Nothelpful', nothelpful_scheme_comment_path(comment.scheme, comment), :class => 'nothelpful_comment', :remote => true %></span>
+      <% end %>
+      <img src="/assets/spinner.gif" alt="" class="spinner hidden">
+    </div>
+    <section class="media class_replies hidden">
+      <%= render :partial => 'comments/reply_item', :locals => { :comment => comment } %>
+    </section>
+  </div>
+</li>

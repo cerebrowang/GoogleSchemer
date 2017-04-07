@@ -1,0 +1,35 @@
+<%= form_for(@scheme) do |f| %>
+<%= render 'shared/error_messages', object: f.object %>
+<%= f.hidden_field :user_id, :value => current_user.id %>
+<div id="id_CreateSchemeModel" class="modal scheme-model-fix right-angle" tabindex="-1" role="dialog" aria-labelledby="id_CreateSchemeModel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header scheme-model-header-fix">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+        <div class="btn-group">
+          <a class="scheme-modal-header-link-fix dropdown-toggle" data-toggle="dropdown">I Want to<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">I want to</a></li>
+            <li><a href="#">I've done</a></li>
+          </ul>
+        </div><br />
+        <%= f.text_field :content, :class => "article-input-fix", :"aria-haspopup" => "true", :style => "width: 100%;" %>
+
+      </div><!-- /.modal-header -->
+      <div class="modal-body scheme-modal-body-fix">
+
+          <p>Add a comment Why should people do this scheme? Any tips?</p>
+          <%= fields_for :comments, @scheme.comments.build do |comment| %>  
+          <%= comment.text_area :content, :class => "form-control", :rows => "2" %>
+          <% end %>
+
+      </div><!-- /.modal-body -->
+      <div class="modal-footer scheme-model-footer-fix">
+        <%= f.submit "Create scheme", class: "btn btn-fix btn-blue-fix" %>
+        <button class="btn btn-link btn-fix" data-dismiss="modal">Cancel</button>
+      </div><!-- /.modal-footer -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<% end %>

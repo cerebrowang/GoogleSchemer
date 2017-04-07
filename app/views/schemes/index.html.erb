@@ -1,0 +1,22 @@
+<h1>Listing schemes</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @schemes.each do |scheme| %>
+  <tr>
+    <td><%= scheme.content %></td>
+    <td><%= scheme.user_id %></td>
+    <td><%= link_to 'Show', :action => :show, :id => scheme.id %>
+    <td><%= link_to 'Destroy', { :action => :destroy, :id => scheme.id }, 
+                                                      method: :delete, 
+                                                      date: { confirm: 'Are you sure?' } %>
+  </tr>
+<% end %>
+</table>

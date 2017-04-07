@@ -1,0 +1,49 @@
+<li class="media li-media-fix" id="<%= feed_item.id %>">
+  <%= link_to image_tag(feed_item.image.big.url, :class => "media-object li-image-border-fix"), feed_item, :class => "pull-left" %>
+  <div class="media-body">
+    <div class="btn-group pull-right" data-toggle="buttons">
+      <% connection = current_user.connections.where(scheme_id: feed_item.id).first %>
+      <%= form_tag(mark_done_scheme_path(feed_item.id), :class => "pull-right", :method => :put, remote: true) do %>
+        <% if !connection.nil? && connection.is_done == true %>
+          <%= button_tag(:class => "btn btn-xs active", :type => "radio", :name => "options") do %>
+            <span class="glyphicon glyphicon-ok"></span>
+          <% end %>
+        <% else %>
+          <%= button_tag(:class => "btn btn-xs", :type => "radio", :name => "options") do %>
+            <span class="glyphicon glyphicon-ok"></span>
+          <% end %>        
+        <% end %>
+      <% end %>
+      <%= form_tag(mark_todo_scheme_path(feed_item.id), :class => "pull-right margin-right-10", :method => :put, remote: true) do %>
+        <% if !connection.nil? && connection.is_done == false %>
+          <%= button_tag(:class => "btn btn-xs active", :type => "radio", :name => "options") do %>
+            <span class="glyphicon glyphicon-plus"></span>
+          <% end %>
+        <% else %>
+          <%= button_tag(:class => "btn btn-xs", :type => "radio", :name => "options") do %>
+            <span class="glyphicon glyphicon-plus"></span>
+          <% end %>        
+        <% end %>
+      <% end %>
+    </div>    
+    <h5 class="media-heading">
+      <strong><%= link_to feed_item.content, feed_item %></strong>
+    </h5>
+    <% feed_item.reverse_connections.from_users_followed_by(current_user).each do |connection_item| %>
+    <div class="media media-fix">
+      <%= link_to image_tag(connection_item.schemer.image_url(:normal), alt: connection_item.schemer.name, class: "media-object img-thumbnail img-thumbnail-fix"), connection_item.schemer, :class => "pull-left" %>
+      <div class="media-body">
+        <div class="media-heading margin-0">
+          <% if connection_item.is_done? %>
+            <%= link_to connection_item.schemer.name, connection_item.schemer %> has done it
+          <% else %>
+            <%= link_to connection_item.schemer.name, connection_item.schemer %> wants to do it
+          <% end %>
+        </div>
+        <%= time_ago_in_words(connection_item.updated_at) %> ago
+      </div>
+    </div>
+    <% end %>
+  </div>
+</li>
+

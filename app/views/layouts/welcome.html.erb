@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= content_for?(:title) ? yield(:title) : "Huing - the beginning of everything worth doing." %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ever wonder what to do? Huing can help. Whether it’s exploring a new city, checking out a friend’s movie recommendation, or just finding new activities for your weekends, Huing lets you discover new things to do, share schemes with friends, and make the most of your day.">
+    <meta name="author" content="Huing, Inc.">
+
+    <!-- Le styles -->
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+
+    <%= render 'layouts/shim' %>
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href= <%= asset_path('favicon.ico') %> >
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href= <%= asset_path('apple-touch-icon-144-precomposed.png') %> >
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href= <%= asset_path('apple-touch-icon-114-precomposed.png') %> >
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href= <%= asset_path('apple-touch-icon-72-precomposed.png') %> >
+    <link rel="apple-touch-icon-precomposed" href= <%= asset_path('apple-touch-icon-57-precomposed.png') %> >
+  </head>
+
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+
+    <div class="masthead">
+      <div class="container">
+        <div class="row">
+          <div class="marketing">
+            <img src="<%= asset_path('schemer-logo-white.png') %>" alt="">
+            <h4>The beginning of Social Executive Search.</h4>
+              <%= yield %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container marketing">         
+    </div>
+
+    <!-- Footer
+    ================================================== -->
+    <footer class="footer footer-fix">
+      <div class="container footer-background"> 
+        <div class="row intro-fix">
+          <div class="col-md-4">
+            <img src="/assets/glyphicons_051_eye_open.png" alt="">
+            <h4>Find Stuff to do. Big or small.</h4>
+          </div>
+          <div class="col-md-4">
+            <img src="/assets/glyphicons_341_briefcase.png" alt="">
+            <h4>Keep track of what you want to do, pick something and go!</h4>
+          </div>
+          <div class="col-md-4">
+            <img src="/assets/glyphicons_043_group.png" alt="">
+            <h4>Get ideas from celebrities, experts and friends!</h4>
+          </div>
+        </div>
+        <nav>
+          <ul class="footer-links">
+            <li>© 2014 Huing</li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/jobs">Jobs</a></li>
+            <li><a href="/help">Help</a></li>
+            <li><a href="/policies">Privacy &amp; Terms</a></li>
+            <li><a href="/sitemap">Sitemap</a></li>
+            <li><a href="mailto:support@huing.com">Send email</a></li>
+          </ul>
+        </nav>        
+      <div class="schemer-footer"></div>
+      </div>
+    </footer>
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-38762918-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+  </body>
+</html>

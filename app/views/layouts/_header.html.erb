@@ -1,0 +1,28 @@
+<header role="banner" class="container padding-bigger-fix">
+  <nav role="navigation">
+    <ul id="id_nav_pills" class="nav nav-pills nav-pills-fix">
+      <li>
+        <a class="navbar-brand brand-logo-fix" href="/">Schemer
+          <div class="logo-mustache-bounce-sm"></div>
+        </a>
+      </li>
+      <% if user_signed_in? %>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/find">Find stuff to do</a></li>
+        <li><a href="<%= want_user_path(current_user) %>">Your schemes</a></li>
+        <li><a href="<%= user_path(current_user) %>">Profile</a></li>
+        <% if current_user.has_role? :admin %>
+          <li>
+          <%= link_to 'Admin', users_path %>
+          </li>
+        <% end %>
+    </ul>
+    <% else %>
+    </ul>
+      <ul class="nav nav-pills nav-stacked nav-pills-right-fix">
+        <li><%= link_to 'Sign up', new_user_registration_path, class: "btn btn-fix btn-green-fix pull-right" %></li>
+        <li><%= link_to 'Sign in', new_user_session_path, class: "btn btn-link btn-fix pull-right" %></li>
+      </ul>
+    <% end %>
+  </nav>
+</header>

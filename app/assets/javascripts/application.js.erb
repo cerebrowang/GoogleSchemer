@@ -1,0 +1,182 @@
+// This is a manifest file that'll be compiled into application.js, which will include all the files
+// listed below.
+//
+// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
+// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
+//
+// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// compiled file.
+//
+// Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
+// about supported directives.
+//
+//= require jquery
+//= require jquery_ujs
+//= require jquery.turbolinks
+//= require turbolinks
+//= require bootstrap
+//= require twitter/typeahead
+
+//= require twbs/bootstrap
+//= require i18n
+//= require i18n/translations
+
+//= require handlebars
+//= require_tree .
+
+
+$(document).ready(function() {
+
+
+  var resuleSearchSearch = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('id'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    remote: '../search?search=%QUERY'
+  });
+
+  // kicks off the loading/processing of `local` and `prefetch`
+  resuleSearchSearch.initialize();
+
+  $('#id_typeahead_search').typeahead(null, { 
+    name: 'id',
+    displayKey: 'item_string',
+    source: resuleSearchSearch.ttAdapter(),
+    templates: {
+      empty: [
+        '<div class="empty-message">',
+        'unable to find any place(Tag/User/Scheme) that match the current query',
+        '</div>'
+      ].join('\n'),
+      suggestion: Handlebars.compile('<p><img src="/assets/ic-tag-sm.png">{{item_string}}</p>')
+    }
+  });
+
+
+
+
+  var resuleSearchWhere = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('id'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    remote: '../search?where=%QUERY'
+  });
+
+  // kicks off the loading/processing of `local` and `prefetch`
+  resuleSearchWhere.initialize();
+
+  $('#id_typeahead_where').typeahead(null, { 
+    name: 'id',
+    displayKey: 'item_string',
+    source: resuleSearchWhere.ttAdapter(),
+    templates: {
+      empty: [
+        '<div class="empty-message">',
+        'unable to find any place that match the current query',
+        '</div>'
+      ].join('\n'),
+      suggestion: Handlebars.compile('<p><img src="/assets/ic-location-sm.png">{{item_string}}</p>')
+    }
+  });
+
+
+  $("a.edit_comment").on("click", function(event){
+    event.preventDefault();
+    var ptr_comment_content = $(this).parent().parent().parent().find(".comment_content");
+    var str = $.trim(ptr_comment_content.text());
+    ptr_comment_content.addClass("hidden");
+   
+    $(this).parent().parent().parent().find(".col-md-10").text(str);
+    $(this).parent().parent().parent().find(".edit_comment_form").removeClass("hidden");
+    $(this).parent().parent().parent().find(".col-md-10").trigger("focus");
+  });
+
+  $("button.cancel_edit_comment").on("click", function(){
+    $(".comment_content").removeClass("hidden");
+    $(".edit_comment_form").addClass("hidden");
+  });
+
+  //doing!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  $('#id_add_comment_input').on('click', function(event) {
+    event.preventDefault();
+    $(this).addClass("hidden");
+    $('#id_add_comment_form').removeClass("hidden");
+  });
+
+  $('#id_cancel_add_comment').on('click', function(event) {
+    event.preventDefault();
+    $('#id_add_comment_form').addClass("hidden");
+    $('#id_add_comment_input').removeClass("hidden");
+  });
+
+  $("a.edit_reply").on("click", function(){
+    var ptr_reply_content = $(this).parent().parent().parent().find(".reply_content"); 
+    var str = $.trim(ptr_reply_content.text());
+    ptr_reply_content.addClass("hidden");
+
+    $(this).parent().parent().parent().find(".input-xlarge").text(str);
+    $(this).parent().parent().parent().find(".edit_reply_form").removeClass("hidden");
+    $(this).parent().parent().parent().find(".input-xlarge").trigger("focus");
+    event.preventDefault();
+  });
+
+  $("button.cancel_edit_reply").on("click", function(){
+    $(".reply_content").removeClass("hidden");
+    $(".edit_reply_form").addClass("hidden");
+  });
+
+  $(".reply_comment").on("click", function(event){
+    event.preventDefault();
+    $(this).parent().parent().parent().find(".class_replies").toggleClass("hidden");
+  });
+
+  $(".hide_replies").on("click", function(event){
+    event.preventDefault();
+    $(this).parent().parent().parent().parent().parent().find(".class_replies").addClass("hidden");
+  });
+
+  $(".location").on('mouseover', function(){
+    $(this).css("background-color","#FFFFCC");
+  });
+
+  $(".location_item").on('mouseover', function(){
+    $(this).find(".class_remove").removeClass("hidden");
+  });
+
+  $(".location_item").on('mouseleave', function(){
+    $(this).find(".class_remove").addClass("hidden");
+  });
+
+  $(".location").on("mouseleave", function(){
+    $(this).css("background-color","#FFFFFF");
+  });
+
+  $(".location").on("change", function(){
+    $(this).css("background-color","#FFFFDD");
+    var delete_url = $(this).parent().parent().find(".class_remove").attr('href');
+    var name_var = $(this).parent().parent().find(".name").attr("value");
+    var address_var = $(this).parent().parent().find(".address").attr("value");
+
+    $.ajax({       //Ajax函数
+            type: 'put',   //定义http方法
+            url: delete_url,    //请求的URL
+            data: "location[name]="+name_var+"&location[address]="+address_var,
+            success: function(){alert("ok!")} //请求成功之后的动作
+    });
+  });
+
+  $("#id_todo_list").on('click', function(event){
+    $("this").addClass("open");
+    event.preventDefault();
+  });
+
+  $("#id_done_list").bind("click", function(event){
+    $("#id_done_list_dropdown").click();
+    event.preventDefault();
+  });
+
+  $("#id_inspired_list").bind("click", function(event){
+    $("#id_inspired_list_dropdown").click();
+    event.preventDefault();
+  });
+
+
+});

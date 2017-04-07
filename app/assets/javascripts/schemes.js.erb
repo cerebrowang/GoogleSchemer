@@ -1,0 +1,107 @@
+function toggleWhereType(){
+
+   var checkedRadioButton = $("input[name='scheme[where_type]']:checked").val();
+   if (!checkedRadioButton) {
+        return false;
+    }
+    else {
+      $("#id_where_edit").removeClass("hidden");
+      $("#id_where_done").addClass("hidden");
+      $("#id_where_question").addClass("hidden");
+      $("#id_where_input").addClass("hidden");
+      
+      if (checkedRadioButton == 'option_anywhere')
+      {
+        $("#id_where_anywhere").removeClass("hidden");
+        $("#id_where_home").addClass("hidden");
+        $("#id_where_onlythese").addClass("hidden");
+        $("#id_maps-list").addClass("hidden");
+      }
+      else if (checkedRadioButton == 'option_home')
+      {
+        $("#id_where_anywhere").addClass("hidden");
+        $("#id_where_home").removeClass("hidden");
+        $("#id_where_onlythese").addClass("hidden");
+        $("#id_maps-list").addClass("hidden");
+      }
+      else
+      {
+        $("#id_where_anywhere").addClass("hidden");
+        $("#id_where_home").addClass("hidden");
+        $("#id_where_onlythese").removeClass("hidden");
+        $("#id_maps-list").removeClass("hidden");
+      }
+    }
+};
+
+$(document).ready(function() {
+
+  $('#id_where_input').typeahead({
+    source: function (query, process) {
+        return $.getJSON('/search', { where: query }, function (response) {
+                var data = new Array(); 
+                for (var i in response) {
+                  data.push(response[i]['id'] +"#"+ response[i]['class_name'] +"#"+ response[i]['item_string']);
+                }
+                return process(data);              
+        });
+    },
+    highlighter: function(item) {
+        var parts = item.split('#');
+        html = '<div class="typeahead">';
+        html += '<div><img src="/assets/ic-location-sm.png">'+parts[2]+'</div>';
+        html += '</div>';
+        return html;
+    },
+    updater: function(item) {
+        var parts = item.split('#');
+        var class_id = parts[0];
+        $('#id_where_id').val(class_id);
+        $('#id_where_add_form').submit();
+        return parts[2];
+    }
+  });
+
+  $(".radio_where").on("click", function(){
+
+    toggleWhereType();
+
+    $("#id_where_done").addClass("hidden");
+    $("#id_where_edit").removeClass("hidden");
+    $("#id_where_type_select").trigger("click");
+
+  });
+
+
+  $("#id_where_edit").on("click", function(event){
+    
+    event.preventDefault();
+
+    $(this).addClass("hidden");
+    $("#id_where_done").removeClass("hidden");
+    $("#id_where_question").removeClass("hidden");
+    $("#id_where_anywhere").removeClass("hidden");
+    $("#id_where_home").removeClass("hidden");
+    $("#id_where_onlythese").removeClass("hidden");
+    $("#id_where_input").removeClass("hidden");
+    $("#id_maps-list").removeClass("hidden");
+
+  });
+
+  $("#id_where_done").on("click", function(){
+    
+    event.preventDefault();
+    $(this).addClass("hidden");
+    $("#id_where_edit").removeClass("hidden");
+
+    $("#id_where_question").addClass("hidden");
+    $("#id_where_anywhere").addClass("hidden");
+    $("#id_where_home").addClass("hidden");
+    $("#id_where_onlythese").addClass("hidden");
+    $("#id_where_input").addClass("hidden");
+    $("#id_maps-list").addClass("hidden");
+
+  });
+
+  toggleWhereType();
+});

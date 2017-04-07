@@ -1,0 +1,24 @@
+<% provide(:title, 'Want') %>
+
+<%= render :partial => "shared/profile_aside", :locals => { :user => @user } %>
+
+<article class="col-md-9">
+  <header>
+    <h3>You've authored</h3>
+    <div class="row row-left-fix">
+      <img class="img-thumbnail img-thumbnail-fix" alt="Johnson Wang" title="Johnson Wang" src="/assets/avatar.jpg">
+      <input class="col-md-7 article-input-fix" placeholder="Add a scheme" aria-haspopup="true">
+      <button type="submit" class="btn btn-fix btn-red-fix"><span class="glyphicon glyphicon-pencil"></span> New scheme...</button>
+    </div>
+  </header>
+
+  <div class="row">
+    <% if @schemes.any? %>
+    <%= render partial: 'shared/scheme_item', collection: @schemes %>
+    <% end %>
+  </div>
+
+  <footer>
+    <a href="#"><h5>Show more...</h5></a>
+  </footer>
+</article>

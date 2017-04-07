@@ -1,0 +1,29 @@
+<div id="do_form">
+  <% connection = current_user.connections.where(scheme_id: @scheme.id).first %>
+  <% if connection.nil? %>
+    <div class="btn-group" data-toggle="buttons-radio">
+      <%= button_to "I want to do it", { :action => "mark_todo", :id => @scheme.id },
+                :method => :put, remote: true, :class => "btn btn-lg btn-primary", :id =>"id_mark_todo" %>
+
+      <%= button_to "Already done it", { :action => "mark_done", :id => @scheme.id },
+                :method => :put, remote: true, :class => "btn btn-lg", :id =>"id_mark_done" %>
+    </div>
+  <% elsif connection.is_done == true %>
+
+    <div class="btn-group" data-toggle="buttons-radio">
+      <%= button_to "I want to do it", { :action => "mark_todo", :id => @scheme.id },
+                :method => :put, remote: true, :class => "btn btn-lg btn-primary", :id =>"id_mark_todo" %>
+
+      <%= button_to "Already done it", { :action => "mark_done", :id => @scheme.id },
+                :method => :put, remote: true, :class => "btn btn-lg active", :id =>"id_mark_done" %>
+    </div>
+   <% else %>
+    <div class="btn-group" data-toggle="buttons-radio">
+      <%= button_to "I want to do it", { :action => "mark_todo", :id => @scheme.id },
+                :method => :put, remote: true, :class => "btn btn-lg btn-primary active", :id =>"id_mark_todo" %>
+
+      <%= button_to "Already done it", { :action => "mark_done", :id => @scheme.id },
+                :method => :put, remote: true, :class => "btn btn-lg", :id =>"id_mark_done" %>
+    </div>
+   <% end %>
+</div>

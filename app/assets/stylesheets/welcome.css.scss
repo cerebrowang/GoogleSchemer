@@ -1,0 +1,68 @@
+
+.masthead {
+  padding: 40px 0 30px;
+}
+
+.marketing {
+  text-align: center;
+  color: #145674;
+}
+
+.footer-background {
+  position: absolute;
+  z-index: -1;
+  bottom: 0;
+  width: 100%;
+  height: 170px;
+  background: url(/assets/bg-onboarding-texture.jpg) repeat-x;
+}
+
+.footer-fix {
+  text-align: center;
+  padding: 30px 0;
+  padding-bottom: 0px
+}
+
+.schemer-footer {
+  height: 211px;
+  background: url(/assets/ill-footer.png) no-repeat bottom center;
+  position: relative;
+  top: -309px;
+  margin-bottom: 10px;
+}
+
+.footer-links {
+  color: #56A9A1;
+  margin: 10px 0;
+}
+
+.footer-links li {
+  display: inline;
+  margin-right: 10px;
+}
+
+.footer-links li a {
+  color: #56A9A1;
+}
+
+.intro-fix {
+  padding-top: 20px;
+  color: white;  
+}
+
+.form-signin {
+  max-width: 300px;
+  padding: 19px 29px 29px;
+  margin: 0 auto 20px;
+  border: 1px solid #E5E5E5;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+}
+
+.sign-up-fix {
+  text-align:left;  
+}

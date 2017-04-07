@@ -1,0 +1,3 @@
+var reply_items = $(this).parent().parent().parent().parent().find(".class_replies");
+reply_items.html("<%= escape_javascript( render :partial => 'comments/reply_item', :locals => { :comment => @comment } ) %>");
+alert(reply_items).text());

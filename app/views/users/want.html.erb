@@ -1,0 +1,30 @@
+<% provide(:title, 'Want') %>
+
+<%= render :partial => "shared/profile_aside", :locals => { :user => @user } %>
+
+<article class="col-md-9">
+  <header>
+    <h3>You want to do</h3>
+    <div class="row row-left-fix">
+      <a class="pull-left margin-right-10" href="<%= user_path(current_user) %>">
+        <%= image_tag(current_user.image_url(:normal), alt: current_user.name, class: "img-thumbnail img-thumbnail-fix") %>
+      </a>
+      <input class="col-md-7 article-input-fix" placeholder="Add a scheme" aria-haspopup="true">
+      <!-- Button to trigger modal -->
+      <a href="#id_CreateSchemeModel" role="button" class="btn btn-fix btn-red-fix" data-toggle="modal">
+        <span class="glyphicon glyphicon-pencil"></span> New scheme...
+      </a>
+      <%#= render 'shared/scheme_form' %>
+    </div>
+  </header>
+
+  <div class="row margin-left-0 magin-right-0">
+    <% if @schemes.any? %>
+    <%= render partial: 'shared/scheme_item', collection: @schemes %>
+    <% end %>
+  </div>
+
+  <footer>
+    <a href="#"><h5>Show more...</h5></a>
+  </footer>
+</article>

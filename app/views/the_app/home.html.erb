@@ -1,0 +1,41 @@
+<% provide(:title, 'Home') %>
+<article class="col-md-7">
+  <header>
+    <h3>Schemes from your circles</h3>
+    <div class="row row-left-fix">
+      <a class="pull-left margin-right-10" href="<%= user_path(current_user) %>">
+        <%= image_tag(current_user.image_url(:normal), alt: current_user.name, class: "img-thumbnail img-thumbnail-fix") %>
+      </a>
+      <input class="col-md-7 article-input-fix" placeholder="Add a scheme" aria-haspopup="true">
+      <!-- Button to trigger modal -->
+      <a href="#id_CreateSchemeModel" role="button" class="btn btn-fix btn-red-fix" data-toggle="modal">
+        <span class="glyphicon glyphicon-pencil"></span> New scheme...
+      </a>
+      <%= render 'shared/scheme_form' %>
+    </div>
+  </header>
+  <%= render 'shared/feed' %>
+  <footer>
+    <a href="#"><h5>Show more...</h5></a>
+  </footer>
+</article>
+<aside class="col-md-5">
+  <h4>Invite your partners in crime</h4>
+  <form>
+    <span class="help-block">Inspire your friends and rally them to do stuff! Send them this link:</span>
+    <input class="form-control input-sm" type="text" placeholder="http://huing.com/invite/sg3obeqltnknk"><br />
+    <button type="submit" class="btn btn-fix btn-gray-fix">Invite Friends</button>
+  </form>
+  <h4>Add accomplices to get more great ideas</h4>
+  <p>These people are using Schemer. Add them to your circles to see what they've been scheming up:</p>
+  <%= render 'accomplices' %> 
+  <p>Browse our Gallery of featured partners:</p>
+  <img class="img-thumbnail img-thumbnail-fix aside-li-partner-image-fix" alt="Johnson Wang" src="<%= asset_path('avatar.jpg') %>">
+  <img class="img-thumbnail img-thumbnail-fix aside-li-partner-image-fix" alt="Johnson Wang" src="<%= asset_path('avatar.jpg') %>">
+  <img class="img-thumbnail img-thumbnail-fix aside-li-partner-image-fix" alt="Johnson Wang" src="<%= asset_path('avatar.jpg') %>">
+  <img class="img-thumbnail img-thumbnail-fix aside-li-partner-image-fix" alt="Johnson Wang" src="<%= asset_path('avatar.jpg') %>">
+  <img class="img-thumbnail img-thumbnail-fix aside-li-partner-image-fix" alt="Johnson Wang" src="<%= asset_path('avatar.jpg') %>">
+  <img class="img-thumbnail img-thumbnail-fix aside-li-partner-image-fix" alt="Johnson Wang" src="<%= asset_path('avatar.jpg') %>">
+  <img class="img-thumbnail img-thumbnail-fix aside-li-partner-image-fix" alt="Johnson Wang" src="<%= asset_path('avatar.jpg') %>">
+  <img class="img-thumbnail img-thumbnail-fix aside-li-partner-image-fix" alt="Johnson Wang" src="<%= asset_path('avatar.jpg') %>">
+</aside>

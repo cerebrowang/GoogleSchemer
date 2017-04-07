@@ -1,0 +1,27 @@
+<aside class="col-md-3">
+  <%= link_to image_tag(user.image_url(:large), alt: user.name, class: "thumbnail profile-fix"), user %>
+  <ul class="nav nav-pills nav-stacked nav-stacked-fix">
+    <li class="nav-header nav-header-fix"><%= user.name %></li>
+    <li><a class="a-fix" href="#"><i></i></a></li>
+    <li><a href="<%= user_path(user) %>"><img alt="" src="/assets/profile-icon1.png">Profile</a></li>
+    <li><a href="<%= activity_user_path(user) %>"><img alt="" src="/assets/profile-icon2.png">Latest scheming</a></li>
+    <li><a href="<%= want_user_path(user) %>"><img alt="" src="/assets/profile-icon3.png">Want to do</a></li>
+    <li><a href="<%= done_user_path(user) %>"><img alt="" src="/assets/profile-icon4.png">Done</a></li>
+    <li><a href="<%= authored_user_path(user) %>"><img alt="" src="/assets/profile-icon5.png">Authored</a></li>
+  </ul>
+  <ul class="nav nav-pills nav-stacked nav-stacked-fix">
+    <li class="nav-header nav-header-fix">Where</li>
+    <li><a class="a-fix" href="#"><i></i></a></li>
+    <li><a href="#"><img alt="" src="/assets/staying-home.png">Staying home</a></li>
+    <li><a href="#"><img alt="" src="/assets/neighborhood.png">Your neighborhood</a></li>
+    <li><a href="#"><img alt="" src="/assets/ic-location-grey.png">Work1</a></li>
+    <li><a href="#"><img alt="" src="/assets/ic-location-grey.png">Work2</a></li>
+    <li><a href="#"><i></i>Edit locations</a></li>
+  </ul>
+  <ul class="nav nav-pills nav-stacked nav-stacked-fix">
+    <li class="nav-header nav-header-fix">Interests</li>
+    <li><a class="a-fix" href="#"><i></i></a></li>
+    <li><a href="#"><img alt="" src="/assets/generic_ic_mdpi.png">beauty</a></li>
+    <li><a href="#"><img alt="" src="/assets/generic_ic_mdpi.png">books</a></li>
+  </ul>
+</aside>

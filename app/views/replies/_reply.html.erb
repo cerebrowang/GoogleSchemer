@@ -1,0 +1,31 @@
+<% if User.where(id: reply.user_id).first %>
+  <div class="media"> 
+    <%= link_to image_tag(replier(reply.user_id).image_url(:thumb), alt: replier(reply.user_id).name, class: "media-object img-thumbnail img-thumbnail-fix comment-avatar-fix"), replier(reply.user_id), :class => "pull-left" %>
+    <div class="media-body">
+      <span class="media-heading">
+        <span ><%= link_to replier(reply.user_id).name, replier(reply.user_id) %></span>
+        <span><%= time_ago_in_words(reply.created_at) %> ago</span>
+      </span>
+      <div class="reply_content"><%= reply.content %></div>
+        <% if current_user.id == reply.user_id %>
+        <div class="edit_reply_form hidden">
+          <%= form_for(reply, :url => scheme_comment_reply_path(reply.comment.scheme, reply.comment, reply), :method => "put") do |f| %>
+            <%= f.hidden_field :user_id, :id => nil, :value => current_user.id %>
+            <%= f.text_area :content , class: "col-md-10", :id => nil, rows: "2" %>
+            <%= f.submit "Save reply", class: "btn btn-fix btn-blue-fix" %>
+            <button type="button" class="cancel_edit_reply btn btn-link btn-fix" >Cancel</button>
+          <% end %>
+        </div>
+        <div>
+          <span>
+            <%= link_to 'Edit', edit_scheme_comment_reply_path(reply.comment.scheme, reply.comment, reply), :class => 'edit_reply' %>
+          </span>
+          <span>
+            <%= link_to 'Delete', [reply.comment.scheme, reply.comment, reply], data: { confirm: 'Are you sure?' }, :method => :delete %>
+          </span>
+          <img src="/assets/spinner.gif" alt="" class="spinner hidden">
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

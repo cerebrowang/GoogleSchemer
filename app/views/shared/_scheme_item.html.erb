@@ -1,0 +1,19 @@
+<div class="thumbnail thumbnail-fix">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <div class="caption">
+    <h5 class="line-ellipsis-fix"><%= link_to scheme_item.content, scheme_item, :id => scheme_item.id %></h5>
+    <p class="line-ellipsis-fix">tags: <%=raw scheme_item.tag_list.map.take(3).map { |t| link_to t, tag_path(t) }.join(' ') %></p>
+    <a class="btn btn-sm btn-fix btn-green-fix thumbnail-btn-left-fix">I want to do it</a>
+    <div class="thumbnail-tooltip"><%= scheme_item.schemers.where("is_done = ?", false).count %></div>
+    <a class="btn btn-xs pull-right" href="#"><span class="glyphicon glyphicon-ok"></span></a>
+  </div>
+  <%= link_to image_tag(scheme_item.image_url(:huge), :alt => "default image"), scheme_item %>
+  <div class="caption-fix">
+    <div class="media">
+      <%= link_to image_tag(scheme_item.user.image_url(:normal), alt: scheme_item.user.name, class: "media-object img-thumbnail img-thumbnail-fix"), scheme_item.user, :class => "pull-left" %>
+      <div class="media-body color-fix">
+        <h6 class="media-heading"></h6>Author: <%= scheme_item.user.name %>
+      </div>
+    </div>
+  </div>
+</div>

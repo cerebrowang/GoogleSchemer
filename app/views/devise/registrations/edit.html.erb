@@ -1,0 +1,72 @@
+<%#= render :partial => "shared/profile_aside", :locals => { :user => @user } %>
+<article class="col-md-9">
+  <h3>Settings</h3>
+  <div class="user_profile">
+    <h4 class="heading-fix">USER PROFILE</h4>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class =>"form-horizontal", :method => :put, :multipart => true }) do |f| %>
+      <%= devise_error_messages! %>
+      <%= f.hidden_field :email %>
+      <div class="form-group">
+        <label class="control-label">User avatar</label>
+        <div class="form-control">
+          <%= image_tag resource.image_url(:normal) %>
+          <%= f.file_field :image %>
+            <label class="checkbox inline">
+              <input id="user_remove_image" name="user[remove_image]" type="checkbox" value="1">Remove old avatar
+            </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :name, :class => "control-label" %>
+        <div class="form-control">
+          <%= f.text_field :name, :placeholder =>"Name" %>
+        </div>
+      </div>
+      <%= f.submit "Update", class: "submit btn btn-fix btn-green-fix" %>
+    <% end %>
+  </div>
+
+  <div class="user_password">
+    <h4 class="heading-fix">CHANGE USER PASSWORD OR EMAIL</h4>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class =>"form-horizontal", :method => :put }) do |f| %>
+      <%= devise_error_messages! %>
+      <div class="form-group">
+        <%= f.label :email, :class => "control-label" %>
+        <div class="form-control">
+          <%= f.email_field :email, :placeholder =>"Email" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :password, :class => "control-label" %>
+        <div class="form-control">
+          <%= f.password_field :password, :placeholder =>"Password" %>
+          <span class="help-inline"><i>(leave blank if you don't want to change it)</i></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation, :class => "control-label" %>
+        <div class="form-control">
+          <%= f.password_field :password_confirmation, :placeholder =>"Confirmation" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :current_password, :class => "control-label" %>
+        <div class="form-control">
+          <%= f.password_field :current_password, :placeholder =>"Current password" %>
+          <span class="help-inline"><i>(current password to confirm your changes)</i></span>
+        </div>
+      </div>
+      <%= f.submit "Update", class: "submit btn btn-fix btn-green-fix" %>
+    <% end %>
+  </div>
+
+
+  <%= render :partial => "users/locations", :locals => { :user => resource } %>
+
+  <div>
+    <h4 class="heading-fix">ACCOUNT DELETION</h4>
+    <h5>If you wish, you can permanently delete your Schemer account:</h5>
+    <%= link_to "Delete my account...", registration_path(resource_name), :class => "btn btn-fix btn-gray-fix", data: { confirm: 'Are you sure?' }, :method => :delete %><br />
+    <h5><span class="label label-info">Note:</span> if you downgrade from Google+, your Schemer account will be automatically deleted.</h5>
+  </div>
+</article>

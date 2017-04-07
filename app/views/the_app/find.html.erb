@@ -1,0 +1,54 @@
+<% provide(:title, 'Find') %>
+<aside class="col-md-3">
+  <ul class="nav nav-pills nav-stacked nav-stacked-fix">
+    <li class="nav-header nav-header-fix">Your locations</li>
+    <li><a href="#"><img alt="" src="/assets/staying-home.png">Staying home</a></li>
+    <li><a href="#"><img alt="" src="/assets/neighborhood.png">Your neighborhood</a></li>
+    <li><a href="#"><img alt="" src="/assets/ic-location-grey.png">Work1</a></li>
+    <li><a href="#"><img alt="" src="/assets/ic-location-grey.png">Work2</a></li>
+    <li><a href="#"><i></i>Edit locations</a></li>
+  </ul>
+  <ul class="nav nav-pills nav-stacked nav-stacked-fix">
+    <li class="nav-header nav-header-fix">Your favorites</li>
+    <li><a href="#"><img alt="" src="/assets/restaurants_ic_mdpi.png">restaurants</a></li>
+    <li><a href="#"><i></i>Add favorites</a></li>
+  </ul>
+  <ul class="nav nav-pills nav-stacked nav-stacked-fix">
+    <li class="nav-header nav-header-fix">More categories</li>
+    <li><a href="/find?c=beauty"><img alt="" src="/assets/beauty_ic_mdpi.png">beauty</a></li>
+    <li><a href="/find?c=books"><img alt="" src="/assets/books_ic_mdpi.png">books</a></li>
+    <li><a href="/find?c=cocktails"><img alt="" src="/assets/cocktails_ic_mdpi.png">cocktails</a></li>
+    <li><a href="/find?c=cooking"><img alt="" src="/assets/cooking_ic_mdpi.png">cooking</a></li>
+    <li><a href="/find?c=date%20night"><img alt="" src="/assets/datenight_ic_mdpi.png">date night</a></li>
+    <li><a href="/find?c=do-it-yourself"><img alt="" src="/assets/doityourself_ic_mdpi.png">do-it-yourself</a></li>
+    <li><a href="/find?c=fashion"><img alt="" src="/assets/fashion_ic_mdpi.png">fashion</a></li>
+    <li><a href="/find?c=gifts"><img alt="" src="/assets/gifts_ic_mdpi.png">gifts</a></li>
+    <li><a href="/find?c=home%20improvement"><img alt="" src="/assets/homeimprovement_ic_mdpi.png">home improvement</a></li>
+    <li><a href="/find?c=kid-friendly"><img alt="" src="/assets/kidfriendly_ic_mdpi.png">kid-friendly</a></li>
+    <li><a href="/find?c=movies"><img alt="" src="/assets/movies_ic_mdpi.png">movies</a></li>
+    <li><a href="/find?c=museums"><img alt="" src="/assets/museums_ic_mdpi.png">museums</a></li>
+    <li><a href="/find?c=once%20in%20a%20lifetime"><img alt="" src="/assets/onceinalifetime_ic_mdpi.png">once in a lifetime</a></li>
+    <li><a href="/find?c=outdoors"><img alt="" src="/assets/outdoors_ic_mdpi.png">outdoors</a></li>
+    <li><a href="/find?c=restaurants"><img alt="" src="/assets/restaurants_ic_mdpi.png">restaurants</a></li>
+    <li><a href="/find?c=television"><img alt="" src="/assets/television_ic_mdpi.png">television</a></li>
+    <li><a href="/find?c=vacation"><img alt="" src="/assets/vacation_ic_mdpi.png">vacation</a></li>
+    <li><a href="/find?c=weekend%20getaways"><img alt="" src="/assets/weekendgetaways_ic_mdpi.png">weekend getaways</a></li>
+    <li><a href="/find?c=zombies"><img alt="" src="/assets/zombies_ic_mdpi.png">zombies</a></li>
+  </ul>
+</aside>
+<article class="col-md-9">
+  <header>
+    <h3>Recommended schemes</h3>
+  </header>
+
+  <div class="row margin-left-0 magic-right-0">
+    <% if @schemes.any? %>
+      <%= render partial: 'shared/scheme_item', collection: @schemes %>
+    <% end %>
+  </div>
+
+  <footer>
+    <%#= will_paginate @schemes %>
+    <a href="#"><h5>Show more...</h5></a>
+  </footer>
+</article>

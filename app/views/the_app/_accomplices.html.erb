@@ -1,0 +1,19 @@
+<% if @accomplices.any? %>
+  <ul class="media-list">
+    <% @accomplices.each do |accomplice| %>
+      <% if accomplice != current_user %>
+        <li class="media media-fix">
+          <%= link_to image_tag(accomplice.image_url(:normal), alt: accomplice.name, class: "media-object img-thumbnail-fix"), accomplice, :class => "pull-left" %>
+          <div class="media-body">
+            <h6 class="media-heading col-md-4"><%= link_to accomplice.name, accomplice %></h6>
+            <%= form_for(current_user.relationships.build(followed_id: accomplice.id),
+              remote: true, :html => { :id => nil } ) do |f| %>
+              <div><%= f.hidden_field :followed_id, :id => nil %></div>
+              <%= f.submit "Add to your following", class: "btn btn-link" %>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>

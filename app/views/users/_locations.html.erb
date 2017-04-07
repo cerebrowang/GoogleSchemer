@@ -1,0 +1,19 @@
+<div id="id_locations" class="locations">
+  <h4 class="heading-fix">FAVORITE LOCATIONS</h4>
+  <div>
+    <% current_user.locations.each do |location| %>
+    <div class="location_item">
+      <input type="text" class="input-lg location" value="<%= location.name %>" >
+      <input type="text" class="input-xxlarge location" value="<%=raw location.address %>" >
+      <%= link_to 'Remove', location, method: :delete, data: { confirm: 'Are you sure?' }, :remote => true, class: 'class_remove btn btn-link btn-fix vertical-align-top-fix hidden' %>
+      <%= image_tag("spinner.gif", :class => 'class_spinner hidden') %>
+    </div>
+    <% end %>
+
+    <%= form_for(location = Location.new , :method => "post", :remote => true ) do |f| %>
+    <%= f.text_field :name, :placeholder => "Location", :class => "input-lg location" %>
+    <%= f.text_field :address, :placeholder => "Zip code, city, or address", :class => "input-xxlarge location" %>
+    <%= f.submit "Add", class: "btn btn-fix btn-blue-fix" %>
+    <% end %>
+  </div>
+</div>

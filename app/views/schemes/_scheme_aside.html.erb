@@ -1,0 +1,72 @@
+<aside class="col-md-4">
+  <div class="row">
+    <a href="#" class="thumbnail profile-fix col-md-10 height-auto text-align-center">
+      <%= image_tag scheme.image_url(:huge), :alt => "default image", :class => "img-responsive" %>
+    </a>
+  </div>
+  <div class="row">
+    <div class="height-auto scheme-aside-fix add-photos-img-fix">
+      <strong>Add photo</strong>
+      <%= form_for scheme, :html => {:multipart => true} do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <%= f.file_field :image %>
+        <label class="checkbox">
+          <input id="scheme_remove_image" name="scheme[remove_image]" type="checkbox" value="1" />Remove old photo
+        </label>
+        <%= f.submit "Upload new photo", class: "btn btn-sm btn-fix btn-blue-fix" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="height-auto scheme-aside-fix categories-img-fix">
+      <strong>Categories</strong>
+      <span><a href="#">Edit</a></span>
+      <%= form_for scheme, :html => {:id => nil} do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <label></label>
+        <input id="id_tagManager" type="text" name="tags" placeholder="eg: movie, restaurant, etc..." class="tagManager form-control input-sm"/>
+        <%= f.submit "Add", id: "id_categories_add", class: "btn btn-sm btn-fix btn-blue-fix btn-sm-fix" %>
+        <button id="id_categories_done" type="button" class="btn btn-link btn-fix btn-sm-fix">Done</button>
+      <% end %>
+    </div>
+
+    <div class="height-auto scheme-aside-fix categories-img-fix">
+      <strong>Categories</strong>
+      <span><a href="#">Edit</a></span>
+        <div class="categories">
+          <% scheme.tag_list.each do |tag| %>
+            <span class="category">
+              <%= link_to tag, tag_path(tag) %><button type="button" class="close close-btn-fix">&times;</button>
+            </span>          
+          <% end %>
+          <%= form_tag(find_path, :id => "id_search_form", :class => "navbar-search navbar-search-fix") do %>
+              <input class="form-control input-sm" id="id_typeahead_search" placeholder="Search" name="search" type="text" data-provide="typeahead" data-items="4">
+          <% end %>          
+        </div>
+    </div>
+
+    <div class="height-auto scheme-aside-fix where-img-fix">
+      <strong>Where</strong>
+      <span><a class="where_edit" id="id_where_edit" href="#">Edit</a></span>
+      <span><a class="where_done hidden" id="id_where_done" href="#">Done</a></span>
+      <div class="where_wrapper">
+        <%= render :partial => "update_where", :locals => { :scheme => scheme } %>
+      </div>
+    </div>
+  </div> 
+</aside>
+
+<%= javascript_tag do %>
+
+  $(".tagManager").tagsManager({
+    prefilled: "<%=raw scheme.tag_list %>".split(','),
+    preventSubmitOnEnter: true,
+    typeahead: true,
+    typeaheadAjaxSource: null,
+    typeaheadSource: ["beauty", "books", "cocktails", "cooking", "date night", "do-it-yourself", "fashion", "gifts", "home improvement", "kid-friendly", "movies", "museums", "once in a lifetime", "outdoors", "restaurants", "television", "vacation", "weekend getaways", "zombies"],
+    blinkBGColor_1: '#FFFF9C',
+    blinkBGColor_2: '#CDE69C',
+    hiddenTagListName: 'scheme[tag_list]'
+  });
+
+<% end %>

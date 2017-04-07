@@ -1,0 +1,39 @@
+        
+<label id="id_where_question">Where can you do this?</label>
+
+<%= form_for :scheme, url: { action: :update_where }, :method => :put, :remote => true do |f| %>
+  <%#= render 'shared/error_messages', object: f.object %>  
+  <label class="radio" id="id_where_anywhere">
+    <%= f.radio_button :where_type, "option_anywhere", :class => "radio_where" %>Pretty much anywhere
+  </label>
+  <label class="radio" id="id_where_home">
+    <%= f.radio_button :where_type, "option_home", :class => "radio_where" %>Home
+  </label>
+  <label class="radio" id="id_where_onlythese">
+    <%= f.radio_button :where_type, "option_onlythese", :class => "radio_where" %>Only at these specific locations:
+  </label>
+  <%= f.submit "Where_Type_Hide", id: "id_where_type_select", class: "hidden" %>
+<% end %>
+
+<%= form_tag create_where_scheme_path, :method => :put, :remote => true, :id => "id_where_add_form", :class =>"margin-0" do %>
+  <input id="id_where_input" class="form-control input-sm" placeholder="Enter address or business" name="where" type="text" data-provide="typeahead" data-items="4" ><br />
+  <input id="id_where_id" name="where_id" type="hidden" value="">
+  <%= submit_tag "Where_Add_Hide", class: "hidden" %>
+<% end %>
+
+<ul class="media-list where-ul-fix" id="id_maps-list">
+  <% if @scheme.locations.count > 0 %>
+    <% @scheme.locations.each do |location| %>
+      <li class="media">
+        <%= link_to '×', destroy_where_scheme_path(:location_id => location.id), :class =>"close", :method => :delete, remote: true %>
+        <a class="pull-right" href="http://maps.google.com/maps?q=Beijing%2C%20China" target="_blank">
+          <img class="media-object media-object-fix" alt="" src="/assets/map-logo.jpg">
+        </a>
+        <div class="media-body">
+          <h6 class="media-heading"><a href="http://maps.google.com/maps?q=Beijing%2C%20China" target="_blank"><%= location.name %></a></h6>
+          <%=raw location.address %>
+        </div>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

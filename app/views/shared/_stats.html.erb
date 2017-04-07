@@ -1,0 +1,94 @@
+<% @user ||= current_user %>
+<div class="row">
+  <div class="col-md-3 stats">
+    <h4>Relations</h4>
+    <div class="media">
+      <a class="pull-left" href="#">
+        <img class="media-object" alt="" src="/assets/profile-people.png">
+      </a>
+      <div class="media-body">
+        <a href="<%= following_user_path(@user) %>">
+          <h4 class="media-heading"><%= @user.followed_users.count %></h4>
+          following
+        </a>
+      </div>
+    </div>
+      <div class="media">
+      <a class="pull-left" href="#">
+        <img class="media-object" alt="" src="/assets/profile-people.png">
+      </a>
+      <div class="media-body">
+        <a href="<%= followers_user_path(@user) %>">
+          <h4 class="media-heading"><%= @user.followers.count %></h4>
+          followers
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <h4>Notoriety</h4>
+    <div class="media">
+      <a class="pull-left" href="#">
+        <img class="media-object" alt="" src="/assets/large-pin.png">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading">29988</h4>
+        Schemer has inspired people 29988 times
+      </div>
+    </div>
+    <div class="media">
+      <a class="pull-left" href="#">
+        <img class="media-object" alt="" src="/assets/profile-icon1.png">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading">5795</h4>
+        schemers have Schemer in circles
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <h4>Who inspires Schemer</h4>
+    <div class="media">
+      <a class="pull-left" href="#">
+        <img class="media-object margin-right-5" alt="" src="/assets/leaderboard-flag-blue.png">
+      </a>
+      <div class="media-body">
+        <a class="pull-left" href="#">
+        <img alt="Second User" class="img-thumbnail img-thumbnail-fix margin-right-5" src="/assets/user/normal_default.png">
+        </a>
+        <div class="padding-left-43">
+          <div><a href="/users/2">Second User</a></div>
+          <div>24 times</div>
+        </div>
+      </div>
+    </div>
+    <div class="media">
+      <a class="pull-left" href="#">
+        <img class="media-object margin-right-5" alt="" src="/assets/leaderboard-flag-red.png">
+      </a>
+      <div class="media-body">
+        <a class="pull-left" href="#">
+        <img alt="Second User" class="img-thumbnail img-thumbnail-fix margin-right-5" src="/assets/user/normal_default.png">
+        </a>
+        <div class="padding-left-43">
+          <div><a href="/users/2">Second User</a></div>
+          <div>24 times</div>
+        </div>
+      </div>
+    </div>
+    <div class="media">
+      <a class="pull-left" href="#">
+        <img class="media-object margin-right-5" alt="" src="/assets/leaderboard-flag-green.png">
+      </a>
+      <div class="media-body">
+        <a class="pull-left" href="#">
+        <img alt="Second User" class="img-thumbnail img-thumbnail-fix margin-right-5" src="/assets/user/normal_default.png">
+        </a>
+        <div class="padding-left-43">
+          <div><a href="/users/2">Second User</a></div>
+          <div>24 times</div>
+        </div>
+      </div>
+    </div> 
+  </div>
+</div>

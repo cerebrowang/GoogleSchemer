@@ -1,0 +1,13 @@
+<%= link_to image_tag(current_user.image_url(:thumb), alt: current_user.name, class: "media-object img-thumbnail img-thumbnail-fix comment-avatar-fix"), current_user, :class => "pull-left" %>
+<div class="media-body">
+  <div class="media-heading">
+    <%= link_to current_user.name, current_user %> replied:
+  </div>
+  <%= form_for([comment.scheme, comment, comment.replies.build ], :html => {:id => nil}, method: :post) do |f| %>
+  <%= f.hidden_field :user_id, :id => nil, :value => current_user.id %>
+  <%= f.text_area :content , class: "col-md-10", :id => nil, rows: "2", placeholder: "Add a reply" %><br />
+  <%= f.submit "Post reply", class: "btn btn-fix btn-blue-fix" %>
+  <button type="button" class="hide_replies btn btn-link btn-fix">Hide replies</button>
+  <% end %>
+</div>
+<%= render comment.replies %>

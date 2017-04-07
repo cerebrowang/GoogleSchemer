@@ -1,0 +1,7 @@
+<%= form_for([@scheme, @scheme.comments.build], :url => scheme_comment_path(comment), :action => "update", :method => "put") do |f| %>
+
+<%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= f.text_area :content , class: "input-xlarge", rows: "2", cols: "40" %>
+    <%= f.submit "Save comment", class: "btn btn-lg btn-primary" %>
+    <button type="button" class="cancel_edit_comment btn btn-link btn-fix" >Cancel</button>
+<% end %>

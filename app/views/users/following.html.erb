@@ -1,0 +1,30 @@
+<% provide(:title, @user.name) %>
+
+<%= render :partial => "shared/profile_aside", :locals => { :user => @user } %>
+
+<article class="col-md-9">
+  <header>
+    <h3><%= @user.name %></h3>
+    <%= render 'follow_form' if user_signed_in? %>
+    <div class="row row-left-fix">
+      <%= form_tag(followers_user_path(@user), :method => "get") do %>
+        <img alt="people" src="/assets/profile-people.png">
+        <%= text_field_tag :search, nil, :"aria-haspopup" => "true", :class => "input-xxlarge", :placeholder => "Search people", :style => "margin-bottom: 0;" %>
+        <%= submit_tag "Search", :name => nil, :class => "btn btn-fix btn-red-fix" %>
+      <% end %>
+    </div>
+  </header>
+
+  <div class="row">
+    <% if @users.any? %>
+    <h3>Following (<%= @count %>)</h3>
+    <ul class="sections">
+      <%= render @users %>
+    </ul>
+    <% end %>
+  </div>
+
+  <footer>
+    <a href="#"><h5>Show more...</h5></a>
+  </footer>
+</article>

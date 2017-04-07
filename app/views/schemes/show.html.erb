@@ -1,0 +1,148 @@
+<article class="col-md-8">
+  <header>
+    <h1><%= @scheme.content %></h1>
+    <div class="row scheme-states">
+      <% connection = current_user.connections.where(scheme_id: @scheme.id).first %>
+      <div class="col-md-4 it-container">
+        <% if !connection.nil? && connection.is_done == false %>
+          <%= button_to "I WANT TO DO IT", { :action => "mark_todo", :id => @scheme.id },
+            :method => :put, remote: true, :class => "btn btn-lg btn-fix btn-green-fix scheme-btn-fix scheme-green-btn-shadow-fix active", :id =>"id_mark_todo" %>
+        <% else %>
+          <%= button_to "I WANT TO DO IT", { :action => "mark_todo", :id => @scheme.id },
+            :method => :put, remote: true, :class => "btn btn-lg btn-fix btn-green-fix scheme-btn-fix scheme-green-btn-shadow-fix", :id =>"id_mark_todo" %>
+        <% end %>
+        <div id="id_todo_list" class="todo-it dropdown">
+        <a id="id_todo_list_dropdown" class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">Dropdown trigger</a>
+        <ul id="id_todo_dropdown-menu" class="dropdown-menu right-angle" role="navigation" aria-labelledby="id_todo_list_dropdown">
+          <li><a tabindex="-1" href="#"><h5>Who wants to do it</h5></a></li>
+          <li><a tabindex="-1" href="#">You and 1 person in your circles</a></li>
+          <% @todo_schemers.each do |todo_schemer| %>
+            <li>
+              <a tabindex="-1" href="<%= user_path(todo_schemer) %>">
+                <%= image_tag(todo_schemer.image_url(:thumb), alt: todo_schemer.name, class: "img-thumbnail img-thumbnail-fix comment-avatar-fix") %><%= todo_schemer.name %>
+              </a>
+            </li>
+          <% end %>
+        </ul>           
+          <div class="row margin-0">
+            <% if !connection.nil? && connection.is_done == false %>
+             <%= image_tag(current_user.image_url(:normal), alt: current_user.name, class: "img-thumbnail img-thumbnail-fix pull-left") %>
+            <% end %>
+            <% @todo_schemers.limit(2).each do |todo_schemer| %>
+              <% if todo_schemer.id != current_user.id %>
+                <%= image_tag(todo_schemer.image_url(:normal), alt: todo_schemer.name, class: "img-thumbnail img-thumbnail-fix pull-left") %>
+              <% end %>
+            <% end %>                     
+           <div class="thumbnail-tooltip"><%= @todo_schemers.count %></div>
+         </div>
+         <div class="row schemer-state margin-0">
+          <%= @todo_schemers.count %><span> people want to do it</span>
+        </div>
+        <div class="col-md-12 rally-accomplices pull-left"><span>Rally accomplices</span></div>
+      </div>
+    </div>
+    <div class="col-md-4 it-container">
+      <% if !connection.nil? && connection.is_done == true %>
+        <%= button_to "ALREADY DONE IT", { :action => "mark_done", :id => @scheme.id },
+          :method => :put, remote: true, :class => "btn btn-lg btn-fix scheme-btn-fix btn-gray-fix scheme-gray-btn-shadow-fix active", :id =>"id_mark_done" %>
+      <% else %>
+        <%= button_to "ALREADY DONE IT", { :action => "mark_done", :id => @scheme.id },
+          :method => :put, remote: true, :class => "btn btn-lg btn-fix scheme-btn-fix btn-gray-fix scheme-gray-btn-shadow-fix", :id =>"id_mark_done" %>
+      <% end %>    
+      <div id="id_done_list" class="todo-it dropdown">
+        <a id="id_done_list_dropdown" class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown trigger</a>
+        <ul id="id_done_dropdown-menu" class="dropdown-menu right-angle" role="navigation" aria-labelledby="id_done_list_dropdown">
+          <li><a tabindex="-1" href="#"><h5>Who’s done it</h5></a></li>
+          <% @done_schemers.each do |done_schemer| %>
+            <li>
+              <a tabindex="-1" href="<%= user_path(done_schemer) %>">
+                <%= image_tag(done_schemer.image_url(:thumb), alt: done_schemer.name, class: "img-thumbnail img-thumbnail-fix comment-avatar-fix") %><%= done_schemer.name %>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+        <div class="row margin-0">
+          <% if !connection.nil? && connection.is_done == true %>
+            <%= image_tag(current_user.image_url(:normal), alt: current_user.name, class: "img-thumbnail img-thumbnail-fix pull-left") %>
+          <% end %>
+          <% @done_schemers.limit(2).each do |done_schemer| %>
+            <% if done_schemer.id != current_user.id %>
+              <%= image_tag(done_schemer.image_url(:normal), alt: done_schemer.name, class: "img-thumbnail img-thumbnail-fix pull-left") %>
+            <% end %>
+          <% end %>                     
+          <div class="thumbnail-tooltip"><%= @done_schemers.count %></div>
+        </div>
+      <div class="row schemer-state pull-left margin-0">
+        <%= @done_schemers.count %><span> people have done it</span>
+      </div> 
+    </div>
+  </div>
+  <div class="col-md-4 it-container">    
+    <div class="off-buttons-group">
+      <div class="trash-off-container">
+        <div class="trash-off" role="button" title="Disown this scheme"></div>
+      </div>
+      <div class="flag-off-contrainer">
+        <div class="flag-off" role="button" title="Report abuse"></div>
+      </div>
+    </div>
+    <div id="id_inspired_list" class="todo-it dropdown">
+      <a id="id_inspired_list_dropdown" class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown trigger</a>
+      <ul id="id_inspired_dropdown-menu" class="dropdown-menu right-angle" role="navigation" aria-labelledby="id_inspired_list_dropdown">
+        <li><a tabindex="-1" href="#"><h5>Inspiration</h5></a></li>
+        <li><a tabindex="-1" href="#">You heard about this scheme from…</a></li>
+
+        <li>
+          <a tabindex="-1" href="<%= user_path(@scheme.user) %>">
+          <%= image_tag(@scheme.user.image_url(:thumb), alt: @scheme.user.name, class: "img-thumbnail img-thumbnail-fix comment-avatar-fix") %><%= @scheme.user.name %>
+          </a>
+        </li>
+
+        <li class="divider"></li>
+        <li>
+          <a tabindex="-1" href="<%= user_path(@scheme.user) %>">
+          <%= image_tag(current_user.image_url(:thumb), alt: current_user.name, class: "img-thumbnail img-thumbnail-fix comment-avatar-fix") %><strong>You</strong>
+          </a>
+        </li>        
+        <li class="divider"></li>
+        <li><a tabindex="-1" href="#">Share to inspire someone!</a></li>
+      </ul> 
+      <div class="row margin-0">
+       <%= image_tag(@scheme.user.image_url(:normal), alt: @scheme.user.name, class: "img-thumbnail img-thumbnail-fix pull-left") %>
+      </div>
+      <div class="row schemer-state margin-0">
+        <span>Share to inspire others!</span>
+      </div>
+      <div class="col-md-12 rally-accomplices pull-left"><span>Share</span></div>
+    </div>
+  </div>
+</div>
+<div class="post-comment row">
+  <div class="media pull-left media-fix">
+    <a class="pull-left" href="<%= user_path(current_user) %>">
+      <%= image_tag(current_user.image_url(:normal), alt: current_user.name, class: "media-object img-thumbnail img-thumbnail-fix") %>
+    </a>   
+  </div>
+    <div id = "id_add_comment">
+      <input class="col-md-5 article-input-fix" id="id_add_comment_input" placeholder="Add a comment" type="text">
+      <div id = "id_add_comment_form" class="media-body hidden">
+        <%= form_for([@scheme, @comment], :html => { :id => nil }) do |f| %>
+          <%= f.hidden_field :user_id, :id => nil, :value => current_user.id %>
+          <h6 class="media-heading"><%= link_to current_user.name, current_user %></h6>
+          <div class="col-md-10 padding-left-0">
+          <%= f.text_area :content , :id => nil, class: "form-control margin-bottom-10", rows: "2" %>
+          </div>
+          <%= f.submit "Post comment", class: "btn btn-fix btn-blue-fix" %>
+          <button type="button" id="id_cancel_add_comment" class="btn btn-link btn-fix" >Cancel</button>
+        <% end %>
+      </div>
+    </div>
+</div>
+</header>
+
+<ul class="media-list">
+  <%= render @scheme.comments %>
+</ul>
+</article>
+
+<%= render :partial => "scheme_aside", :locals => { :scheme => @scheme } %>

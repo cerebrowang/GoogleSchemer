@@ -1,0 +1,12 @@
+<li>
+  <span class="content"><%= link_to scheme.content, scheme, :action => "show", :id => scheme.id %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(scheme.created_at) %> ago.
+  </span>
+
+  <% if current_user == scheme.user %>
+    <%= link_to "delete", scheme, method:  :delete,
+                                  date:    { confirm: "You sure?" },
+                                  title:   scheme.content %>
+  <% end %>
+</li>
