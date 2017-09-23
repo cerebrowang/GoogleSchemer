@@ -1,0 +1,8 @@
+title: Googleschemer
+description: the Body with God of Google Schemer application
+google_analytics: Schemer
+show_downloads: true
+theme: jekyll-theme-merlot
+
+gems:
+  - jekyll-mentions
